@@ -108,9 +108,9 @@
             <source src="2.mp3" type="audio/mpeg"> <!-- Sound for other targets -->
         </audio>
         <img id="shoe" class="shoe" src="https://img.icons8.com/emoji/48/000000/running-shoe.png" alt="Shoe">
-        <img id="target1" class="target" src="61.jpg" alt="Target 1"> <!-- Updated -->
-        <img id="target2" class="target" src="62.jpeg" alt="Target 2"> <!-- Updated -->
-        <img id="target3" class="target" src="63.png" alt="Target 3"> <!-- Updated -->
+        <img id="target1" class="target" src="61.jpg" alt="Target 1">
+        <img id="target2" class="target" src="62.jpeg" alt="Target 2">
+        <img id="target3" class="target" src="63.png" alt="Target 3">
     </div>
     <div class="scoreboard">
         Shots Left: <span id="shotsLeft">10</span> | Score: <span id="score">0</span>
@@ -143,8 +143,11 @@
 
         let shoePosition = { x: 100, y: 100 };
 
-        // Start playing background music
-        document.getElementById('backgroundMusic').play();
+        // Start playing background music when the user clicks to start the game
+        document.getElementById('shootButton').onclick = function() {
+            document.getElementById('backgroundMusic').play();
+            this.disabled = true; // Disable the button after the first click to prevent multiple calls
+        };
 
         function moveShoe(direction) {
             const moveBy = 20;
@@ -202,17 +205,3 @@
         function playSound(soundId) {
             const sound = document.getElementById(soundId);
             sound.currentTime = 0; // Reset the sound
-            sound.play();
-            setTimeout(() => {
-                sound.pause(); // Stop the sound after 5 seconds
-            }, 5000);
-        }
-
-        function restartGame() {
-            score = 0;
-            shotsLeft = 10;
-            document.getElementById('shotsLeft').textContent = shotsLeft;
-            document.getElementById('score').textContent = score;
-            shoePosition = { x: 100, y: 100 };
-            shoe.style.left = shoePosition.x + 'px';
-            shoe.style.top = shoePosition.y
